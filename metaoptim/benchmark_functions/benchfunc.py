@@ -81,7 +81,7 @@ class BukinN6(BenchFunc):
         self.bounds = np.array([[-15, -5], [-3, 3]])
         self.optimum_value = 0.0
         self.dim = 2
-        self.name = "Bukin"
+        self.name = "Bukin N.6"
 
     def eval(self, x):
         if not isinstance(x, np.ndarray):
@@ -113,7 +113,7 @@ class LeviN13(BenchFunc):
         self.bounds = np.array([[-10, 10], [-10, 10]])
         self.optimum_value = 0.0
         self.dim = 2
-        self.name = "Levi"
+        self.name = "Levi N.13"
 
     def eval(self, x):
         if not isinstance(x, np.ndarray):
@@ -265,3 +265,39 @@ class SchafferN4(BenchFunc):
         if x.shape != (self.dim,):
             raise ValueError("Input (x) must have shape ({},).".format(self.dim))
         return 0.5 + (np.cos(np.sin(np.abs(x[0] ** 2 - x[1] ** 2))) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2)) ** 2
+
+
+class DropWave(BenchFunc):
+    def __init__(self):
+        super().__init__()
+        self.bounds = np.array([[-5.12, 5.12], [-5.12, 5.12]])
+        self.optimum_value = -1.0
+        self.dim = 2
+        self.name = "Drop-Wave"
+
+    def eval(self, x):
+        if not isinstance(x, np.ndarray):
+            raise TypeError("Input (x) must be a numpy array.")
+        if x.shape != (self.dim,):
+            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+        return -(1 + np.cos(12 * np.sqrt(x[0] ** 2 + x[1] ** 2))) / (0.5 * (x[0] ** 2 + x[1] ** 2) + 2)
+
+
+class Shubert(BenchFunc):
+    def __init__(self):
+        super().__init__()
+        self.bounds = np.array([[-10, 10], [-10, 10]])
+        self.optimum_value = -186.7309
+        self.dim = 2
+        self.name = "Shubert"
+        self.five_range = np.arange(1, 6)
+
+    def eval(self, x):
+        if not isinstance(x, np.ndarray):
+            raise TypeError("Input (x) must be a numpy array.")
+        if x.shape != (self.dim,):
+            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+        return np.sum(self.five_range * np.cos((self.five_range + 1) * x[0] + self.five_range)) * np.sum(self.five_range * np.cos((self.five_range + 1) * x[1] + self.five_range))
+
+
+
