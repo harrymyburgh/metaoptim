@@ -1,4 +1,4 @@
-from metaoptim.benchmark_functions.benchfunc import BenchFunc
+from metaoptim.benchmark_functions.bench_func import BenchFunc
 import numpy as np
 
 
