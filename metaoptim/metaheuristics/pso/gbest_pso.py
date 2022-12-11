@@ -95,6 +95,7 @@ class GBestPSO(PSO):
         self.w = w
         self.c1 = c1
         self.c2 = c2
+        # TODO: velocity clamping
 
     def update(self):
         '''
