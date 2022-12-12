@@ -118,7 +118,7 @@ class GBestPSO(PSO):
         Update the best positions and fitnesses.
         '''
         fitness = self.problem(self.swarm)
-        self.pbest, self.pbest_fitness, self.gbest, self.gbest_fitness = _update_bests_helper(fitness, self.swarm, self.pbest, self.pbest_fitness, self.gbest, self.gbest_fitness)
+        self.pbest, self.pbest_fitness, self.gbest, self.gbest_fitness = _update_bests_helper(fitness, self.swarm, self.pbest, self.pbest_fitness, self.gbest, self.gbest_fitness, self.minimize)
 
     def _update_velocity(self):
         '''
