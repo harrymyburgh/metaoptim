@@ -1,4 +1,4 @@
-from metaoptim.metaheuristics.pso.pso import PSO
+from metaoptim.pso.pso import PSO
 import copy
 import numpy as np
 import numba

@@ -1,14 +1,12 @@
 import inspect
 import sys
 
-from metaoptim.benchmark_functions.bench_func import Beale, GoldsteinPrice, Booth, BukinN6, Matyas, LevyN13, Himmelblau, \
-    ThreeHumpCamel, Easom, CrossInTray, Eggholder, McCormick, SchafferN2, SchafferN4, DropWave
+from metaoptim.bench_func import Beale, GoldsteinPrice, Booth, BukinN6, Matyas, LevyN13, Himmelblau, \
+    ThreeHumpCamel, Easom, CrossInTray, Eggholder, McCormick, SchafferN2, SchafferN4, DropWave, Rastrigin, Rosenbrock, \
+    Ackley, Sphere, StyblinskiTang, Griewank, Levy, DixonPrice
 import unittest
 import numpy as np
 from numpy.testing import assert_array_almost_equal
-
-from metaoptim.benchmark_functions.varying_dim_bench_func.varying_dim_bench_func import Rastrigin, Rosenbrock, Ackley, \
-    Sphere, StyblinskiTang, Griewank, Levy, DixonPrice
 
 
 class TestBeale(unittest.TestCase):

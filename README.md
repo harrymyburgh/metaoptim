@@ -83,11 +83,39 @@ The package is structured as follows:
 
 - `metaoptim`: The package directory.
     - `config.py`: The configuration file.
-    - `benchmark_functions`: The benchmark functions package.
-      - `bench_func.py`: Contains the `BenchFunc` class.
-      - `varying_dim_bench_func`: Variable-dimensional benchmark functions package.
-        - `varying_dim_bench_func.py` Variable-dimensional benchmark functions are defined in here and are subclasses of the `VaryingDimBenchFunc` class which is a subclass of the `BenchFunc` class.
-    - `metaheuristics`: The metaheuristic algorithms package.
-      - `pso`: The Particle Swarm Optimization algorithms package.
-        - `pso.py`: The `PSO` parent class.
-        - `gbest_pso.py`: The Global Best Particle Swarm Optimization algorithm (`GBestPSO`). Features an inertia weight, a cognitive and a social component.
+    - `bench_func.py`: Contains the benchmark functions.
+    - `pso`: The Particle Swarm Optimization algorithms package.
+      - `pso.py`: The `PSO` parent class.
+      - `gbest_pso.py`: The Global Best Particle Swarm Optimization algorithm (`GBestPSO`). Features an inertia weight, a cognitive and a social component.
+
+## Contributing
+
+### Guidelines for Contributing
+
+1. In the description of your pull request, please explain clearly what does it implement or fix and your changes. Where possible, you should give examples in the description of the pull request. In cases that the pull request is about a code speedup, report a reproducible example and quantify the speedup.
+
+2. Give your pull request a helpful title that summarises what your contribution does.
+
+3. Write unit tests for your code in the `test` directory and make sure the existing tests are up-to-date. Use `pytest` to run the tests:
+
+```bash
+pytest
+```
+
+4. Make sure that there a no stylistic issues in files you have edited using `pycodestyle`:
+
+```bash
+pycodestyle <FILE_PATH>
+```
+
+where `<FILE_PATH>` is the path to the file you want to check.
+
+5. Make sure your code is properly commented and documented using *reStructuredText* docstrings and additional comments where necessary. Each public method needs to be documented as the existing ones.
+
+### Development Dependencies
+
+To install the development dependencies, run the following command:
+
+```bash
+pip3 install metaoptim[dev]
+```
