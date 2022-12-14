@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='metaoptim',
-    version='0.0.12',
+    version='0.0.13',
     description='A Python package for metaheuristic optimisation.',
     long_description=long_description,
     long_description_content_type='text/markdown',
