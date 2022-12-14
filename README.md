@@ -110,6 +110,12 @@ pycodestyle <FILE_PATH>
 
 where `<FILE_PATH>` is the path to the file you want to check.
 
+To check all files in the package, run:
+
+```bash
+pycodestyle src/*
+```
+
 5. Make sure your code is properly commented and documented using *reStructuredText* docstrings and additional comments where necessary. Each public method needs to be documented as the existing ones.
 
 ### Development Dependencies

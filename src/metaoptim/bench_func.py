@@ -39,10 +39,12 @@ class Beale(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return (1.5 - x[0] + x[0] * x[1]) ** 2 + (2.25 - x[0] + x[0] * x[1] ** 2) ** 2 + (
-                2.625 - x[0] + x[0] * x[1] ** 3) ** 2
+        return (1.5 - x[0] + x[0] * x[1]) ** 2 + (
+                2.25 - x[0] + x[0] * x[1] ** 2) ** 2 + (
+                       2.625 - x[0] + x[0] * x[1] ** 3) ** 2
 
 
 class GoldsteinPrice(BenchFunc):
@@ -57,9 +59,14 @@ class GoldsteinPrice(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return (1 + (x[0] + x[1] + 1) ** 2 * (19 - 14 * x[0] + 3 * x[0] ** 2 - 14 * x[1] + 6 * x[0] * x[1] + 3 * x[1] ** 2)) * (30 + (2 * x[0] - 3 * x[1]) ** 2 * (18 - 32 * x[0] + 12 * x[0] ** 2 + 48 * x[1] - 36 * x[0] * x[1] + 27 * x[1] ** 2))
+        return (1 + (x[0] + x[1] + 1) ** 2 * (
+                19 - 14 * x[0] + 3 * x[0] ** 2 - 14 * x[1] + 6 * x[0] * x[
+                    1] + 3 * x[1] ** 2)) * (30 + (2 * x[0] - 3 * x[1]) ** 2 * (
+                        18 - 32 * x[0] + 12 * x[0] ** 2 + 48 * x[1] - 36 * x[0]
+                        * x[1] + 27 * x[1] ** 2))
 
 
 class Booth(BenchFunc):
@@ -74,7 +81,8 @@ class Booth(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
         return (x[0] + 2 * x[1] - 7) ** 2 + (2 * x[0] + x[1] - 5) ** 2
 
@@ -91,9 +99,11 @@ class BukinN6(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return 100 * np.sqrt(np.abs(x[1] - 0.01 * x[0] ** 2)) + 0.01 * np.abs(x[0] + 10)
+        return 100 * np.sqrt(np.abs(x[1] - 0.01 * x[0] ** 2)) + 0.01 * np.abs(
+            x[0] + 10)
 
 
 class Matyas(BenchFunc):
@@ -108,7 +118,8 @@ class Matyas(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
         return 0.26 * (x[0] ** 2 + x[1] ** 2) - 0.48 * x[0] * x[1]
 
@@ -125,9 +136,12 @@ class LevyN13(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return np.sin(3 * np.pi * x[0]) ** 2 + (x[0] - 1) ** 2 * (1 + np.sin(3 * np.pi * x[1]) ** 2) + (x[1] - 1) ** 2 * (1 + np.sin(2 * np.pi * x[1]) ** 2)
+        return np.sin(3 * np.pi * x[0]) ** 2 + (x[0] - 1) ** 2 * (
+                1 + np.sin(3 * np.pi * x[1]) ** 2) + (x[1] - 1) ** 2 * (
+                       1 + np.sin(2 * np.pi * x[1]) ** 2)
 
 
 class Himmelblau(BenchFunc):
@@ -142,7 +156,8 @@ class Himmelblau(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
         return (x[0] ** 2 + x[1] - 11) ** 2 + (x[0] + x[1] ** 2 - 7) ** 2
 
@@ -159,9 +174,11 @@ class ThreeHumpCamel(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return 2 * x[0] ** 2 - 1.05 * x[0] ** 4 + x[0] ** 6 / 6 + x[0] * x[1] + x[1] ** 2
+        return 2 * x[0] ** 2 - 1.05 * x[0] ** 4 + x[0] ** 6 \
+            / 6 + x[0] * x[1] + x[1] ** 2
 
 
 class Easom(BenchFunc):
@@ -176,9 +193,11 @@ class Easom(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return -np.cos(x[0]) * np.cos(x[1]) * np.exp(-(x[0] - np.pi) ** 2 - (x[1] - np.pi) ** 2)
+        return -np.cos(x[0]) * np.cos(x[1]) * np.exp(
+            -(x[0] - np.pi) ** 2 - (x[1] - np.pi) ** 2)
 
 
 class CrossInTray(BenchFunc):
@@ -193,9 +212,11 @@ class CrossInTray(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return -0.0001 * (np.abs(np.sin(x[0]) * np.sin(x[1]) * np.exp(np.abs(100 - np.sqrt(x[0] ** 2 + x[1] ** 2) / np.pi))) + 1) ** 0.1
+        return -0.0001 * (np.abs(np.sin(x[0]) * np.sin(x[1]) * np.exp(
+            np.abs(100 - np.sqrt(x[0] ** 2 + x[1] ** 2) / np.pi))) + 1) ** 0.1
 
 
 class Eggholder(BenchFunc):
@@ -210,9 +231,11 @@ class Eggholder(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return -(x[1] + 47) * np.sin(np.sqrt(np.abs(x[1] + x[0] / 2 + 47))) - x[0] * np.sin(np.sqrt(np.abs(x[0] - (x[1] + 47))))
+        return -(x[1] + 47) * np.sin(np.sqrt(np.abs(x[1] + x[0] / 2 + 47))) \
+               - x[0] * np.sin(np.sqrt(np.abs(x[0] - (x[1] + 47))))
 
 
 class HolderTable(BenchFunc):
@@ -227,9 +250,11 @@ class HolderTable(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return -np.abs(np.sin(x[0]) * np.cos(x[1]) * np.exp(np.abs(1 - np.sqrt(x[0] ** 2 + x[1] ** 2) / np.pi)))
+        return -np.abs(np.sin(x[0]) * np.cos(x[1]) * np.exp(
+            np.abs(1 - np.sqrt(x[0] ** 2 + x[1] ** 2) / np.pi)))
 
 
 class McCormick(BenchFunc):
@@ -244,9 +269,11 @@ class McCormick(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return np.sin(x[0] + x[1]) + (x[0] - x[1]) ** 2 - 1.5 * x[0] + 2.5 * x[1] + 1
+        return np.sin(x[0] + x[1]) + (x[0] - x[1]) ** 2 - 1.5 * x[0] + 2.5 * x[
+            1] + 1
 
 
 class SchafferN2(BenchFunc):
@@ -261,9 +288,11 @@ class SchafferN2(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return 0.5 + (np.sin(x[0] ** 2 - x[1] ** 2) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2)) ** 2
+        return 0.5 + (np.sin(x[0] ** 2 - x[1] ** 2) ** 2 - 0.5) / (
+                1 + 0.001 * (x[0] ** 2 + x[1] ** 2)) ** 2
 
 
 class SchafferN4(BenchFunc):
@@ -278,9 +307,12 @@ class SchafferN4(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return 0.5 + (np.cos(np.sin(np.abs(x[0] ** 2 - x[1] ** 2))) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2)) ** 2
+        return 0.5 + (np.cos(
+            np.sin(np.abs(x[0] ** 2 - x[1] ** 2))) ** 2 - 0.5) / (
+                       1 + 0.001 * (x[0] ** 2 + x[1] ** 2)) ** 2
 
 
 class DropWave(BenchFunc):
@@ -295,9 +327,12 @@ class DropWave(BenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return -(1 + np.cos(12 * np.sqrt(x[0] ** 2 + x[1] ** 2))) / (0.5 * (x[0] ** 2 + x[1] ** 2) + 2)
+        return -(1 + np.cos(12 * np.sqrt(x[0] ** 2 + x[1] ** 2))) / \
+            (0.5 * (x[0] ** 2 + x[1] ** 2) + 2)
+
 
 # TODO: Fix to work with broadcasting
 # class Shubert(BenchFunc):
@@ -313,9 +348,12 @@ class DropWave(BenchFunc):
 #         if not isinstance(x, np.ndarray):
 #             raise TypeError("Input (x) must be a numpy array.")
 #         if x.shape[-1] != self.dim:
-#             raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+#             raise ValueError("Input (x) must
+#             have shape ({},).".format(self.dim))
 #         x = np.transpose(x)
-#         return np.sum(self.five_range * np.cos((self.five_range + 1) * x[0] + self.five_range)) * np.sum(self.five_range * np.cos((self.five_range + 1) * x[1] + self.five_range))
+#         return np.sum(self.five_range * np.cos((self.five_range + 1) * x[0] +
+#         self.five_range)) * np.sum(self.five_range *
+#         np.cos((self.five_range + 1) * x[1] + self.five_range))
 
 
 class VaryingDimBenchFunc(BenchFunc):
@@ -340,13 +378,16 @@ class Rastrigin(VaryingDimBenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return np.sum((x ** 2) - (self.A * np.cos(2 * np.pi * x)), axis=0) + (self.A * self.dim)
+        return np.sum((x ** 2) - (self.A * np.cos(2 * np.pi * x)), axis=0) + (
+                self.A * self.dim)
 
 
 class Ackley(VaryingDimBenchFunc):
-    def __init__(self, dim, bounds=[-32.768, 32.768], a=20, b=0.2, c=2 * np.pi):
+    def __init__(self, dim, bounds=[-32.768, 32.768], a=20, b=0.2,
+                 c=2 * np.pi):
         super().__init__(dim)
         self.bounds = np.array([bounds] * dim)
         self.optimum_value = 0.0
@@ -359,9 +400,13 @@ class Ackley(VaryingDimBenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return -self.a * np.exp(-self.b * np.sqrt(np.sum(x ** 2, axis=0) / self.dim)) - np.exp((1 / self.dim) * np.sum(np.cos(self.c * x), axis=0)) + self.a + np.exp(1)
+        return -self.a * np.exp(
+            -self.b * np.sqrt(np.sum(x ** 2, axis=0) / self.dim)) - np.exp(
+            (1 / self.dim) * np.sum(np.cos(self.c * x),
+                                    axis=0)) + self.a + np.exp(1)
 
 
 class Sphere(VaryingDimBenchFunc):
@@ -377,7 +422,8 @@ class Sphere(VaryingDimBenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
         return np.sum(x ** 2, axis=0)
 
@@ -395,9 +441,11 @@ class Rosenbrock(VaryingDimBenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return np.sum(100 * (x[1:] - x[:-1] ** 2) ** 2 + (1 - x[:-1]) ** 2, axis=0)
+        return np.sum(100 * (x[1:] - x[:-1] ** 2) ** 2 + (1 - x[:-1]) ** 2,
+                      axis=0)
 
 
 class StyblinskiTang(VaryingDimBenchFunc):
@@ -413,7 +461,8 @@ class StyblinskiTang(VaryingDimBenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
         return np.sum(x ** 4 - 16 * x ** 2 + 5 * x, axis=0) / 2
 
@@ -432,9 +481,11 @@ class Griewank(VaryingDimBenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return 1 + np.sum(x ** 2, axis=0) / 4000 - np.prod(np.cos(x / self.range_sqrt), axis=0)
+        return 1 + np.sum(x ** 2, axis=0) / 4000 - np.prod(
+            np.cos(x / self.range_sqrt), axis=0)
 
 
 class Levy(VaryingDimBenchFunc):
@@ -450,10 +501,14 @@ class Levy(VaryingDimBenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
         w = 1 + (x - 1) / 4
-        return np.sin(np.pi * w[0]) ** 2 + np.sum((w[:-1] - 1) ** 2 * (1 + 10 * np.sin(np.pi * w[:-1] + 1) ** 2), axis=0) + (w[-1] - 1) ** 2 * (1 + np.sin(2 * np.pi * w[-1]) ** 2)
+        return np.sin(np.pi * w[0]) ** 2 + np.sum(
+            (w[:-1] - 1) ** 2 * (1 + 10 * np.sin(np.pi * w[:-1] + 1) ** 2),
+            axis=0) + (w[-1] - 1) ** 2 * (1 + np.sin(2 * np.pi * w[-1]) ** 2)
+
 
 # TODO: Fix Schwefel
 # class Schwefel(VaryingDimBenchFunc):
@@ -469,9 +524,11 @@ class Levy(VaryingDimBenchFunc):
 #         if not isinstance(x, np.ndarray):
 #             raise TypeError("Input (x) must be a numpy array.")
 #         if x.shape[-1] != self.dim:
-#             raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+#             raise ValueError("Input (x) must
+#             have shape ({},).".format(self.dim))
 #         x = np.transpose(x)
-#         return 418.9829 * self.dim - np.sum(x * np.sin(np.sqrt(np.abs(x))), axis=0)
+#         return 418.9829 * self.dim - np.sum(x * np.sin(np.sqrt(np.abs(x))),
+#         axis=0)
 
 
 # TODO: Fix Trid
@@ -486,7 +543,8 @@ class Levy(VaryingDimBenchFunc):
 #         if not isinstance(x, np.ndarray):
 #             raise TypeError("Input (x) must be a numpy array.")
 #         if x.shape[-1] != self.dim:
-#             raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+#             raise ValueError("Input (x) must have shape
+#             ({},).".format(self.dim))
 #         x = np.transpose(x)
 #         return np.sum((x - 1) ** 2, axis=0) - np.sum(x[:-1] * x[1:], axis=0)
 
@@ -502,7 +560,9 @@ class DixonPrice(VaryingDimBenchFunc):
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
-            raise ValueError("Input (x) must have shape ({},).".format(self.dim))
+            raise ValueError(
+                "Input (x) must have shape ({},).".format(self.dim))
         x = np.transpose(x)
-        return (x[0] - 1) ** 2 + np.sum(2 * (2 * np.arange(1, self.dim) + 1) * (2 * x[1:] ** 2 - x[:-1]) ** 2, axis=0)
-
+        return (x[0] - 1) ** 2 + np.sum(2 * (2 * np.arange(1, self.dim) + 1)
+                                        * (2 * x[1:] ** 2 - x[:-1]) ** 2,
+                                        axis=0)

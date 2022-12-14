@@ -1,9 +1,10 @@
 import inspect
 import sys
 
-from metaoptim.bench_func import Beale, GoldsteinPrice, Booth, BukinN6, Matyas, LevyN13, Himmelblau, \
-    ThreeHumpCamel, Easom, CrossInTray, Eggholder, McCormick, SchafferN2, SchafferN4, DropWave, Rastrigin, Rosenbrock, \
-    Ackley, Sphere, StyblinskiTang, Griewank, Levy, DixonPrice
+from metaoptim.bench_func import Beale, GoldsteinPrice, Booth, BukinN6, \
+    Matyas, LevyN13, Himmelblau, ThreeHumpCamel, Easom, CrossInTray, \
+    Eggholder, McCormick, SchafferN2, SchafferN4, DropWave, Rastrigin, \
+    Rosenbrock, Ackley, Sphere, StyblinskiTang, Griewank, Levy, DixonPrice
 import unittest
 import numpy as np
 from numpy.testing import assert_array_almost_equal
@@ -126,7 +127,8 @@ class TestCrossInTray(unittest.TestCase):
     def test_multiple(self):
         cit = CrossInTray()
         x = np.array([[1.34941, 1.34941], [1.34941, 1.34941]])
-        assert_array_almost_equal(cit(x), np.array([-2.06261, -2.06261]), decimal=5)
+        assert_array_almost_equal(cit(x), np.array([-2.06261, -2.06261]),
+                                  decimal=5)
 
 
 class TestEggholder(unittest.TestCase):
@@ -138,7 +140,8 @@ class TestEggholder(unittest.TestCase):
     def test_multiple(self):
         eggholder = Eggholder()
         x = np.array([[512, 404.2319], [512, 404.2319]])
-        assert_array_almost_equal(eggholder(x), np.array([-959.6407, -959.6407]), decimal=4)
+        assert_array_almost_equal(eggholder(x),
+                                  np.array([-959.6407, -959.6407]), decimal=4)
 
 
 class TestMcCormick(unittest.TestCase):
@@ -150,7 +153,8 @@ class TestMcCormick(unittest.TestCase):
     def test_multiple(self):
         mccormick = McCormick()
         x = np.array([[-0.54719, -1.54719], [-0.54719, -1.54719]])
-        assert_array_almost_equal(mccormick(x), np.array([-1.9133, -1.9133]), decimal=4)
+        assert_array_almost_equal(mccormick(x), np.array([-1.9133, -1.9133]),
+                                  decimal=4)
 
 
 class TestSchafferN2(unittest.TestCase):
@@ -174,7 +178,8 @@ class TestSchafferN4(unittest.TestCase):
     def test_multiple(self):
         schaffer_n4 = SchafferN4()
         x = np.array([[0, 1.25313], [0, 1.25313]])
-        assert_array_almost_equal(schaffer_n4(x), np.array([0.292579, 0.292579]), decimal=3)
+        assert_array_almost_equal(schaffer_n4(x),
+                                  np.array([0.292579, 0.292579]), decimal=3)
 
 
 class TestDropWave(unittest.TestCase):
@@ -266,12 +271,14 @@ class TestStyblinskiTang(unittest.TestCase):
     def test_multiple(self):
         styblinski_tang = StyblinskiTang(dim=2)
         x = np.array([[-2.903534, -2.903534], [-2.903534, -2.903534]])
-        assert_array_almost_equal(styblinski_tang(x), np.array([-78.332, -78.332]), decimal=3)
+        assert_array_almost_equal(styblinski_tang(x),
+                                  np.array([-78.332, -78.332]), decimal=3)
 
     def test_high_dim(self):
         styblinski_tang = StyblinskiTang(dim=100)
         x = np.ones(100) * -2.903534
-        self.assertAlmostEqual(styblinski_tang(x), styblinski_tang.get_optimum_value(), places=3)
+        self.assertAlmostEqual(styblinski_tang(x),
+                               styblinski_tang.get_optimum_value(), places=3)
 
 
 class TestGriewank(unittest.TestCase):

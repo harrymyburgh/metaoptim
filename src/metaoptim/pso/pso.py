@@ -19,7 +19,9 @@ class PSO:
         self.max_iter = max_iter
         # TODO: deal with None max_iter
         # TODO: different possible initializations
-        self.swarm = np.random.uniform(self.problem.bounds[:, 0], self.problem.bounds[:, 1], (self.swarm_size, self.dim))
+        self.swarm = np.random.uniform(self.problem.bounds[:, 0],
+                                       self.problem.bounds[:, 1],
+                                       (self.swarm_size, self.dim))
         # TODO: different velocity initialization
         self.velocity = np.zeros((self.swarm_size, self.dim))
         self.minimize = minimize
