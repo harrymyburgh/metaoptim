@@ -1,3 +1,7 @@
+[<img src="https://img.shields.io/badge/license-MIT-green.svg?">](<LINK>)
+[<img src="https://img.shields.io/badge/build-passing-green.svg?">](<LINK>)
+[<img src="https://img.shields.io/badge/tests-UnitTests,pytest-green.svg?">](<LINK>)
+
 # METAOPTIM
 
 metaoptim is a Python package for metaheuristic optimization algorithms. It also features various benchmark functions that can be used to test the performance of the algorithms.

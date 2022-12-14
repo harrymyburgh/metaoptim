@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='metaoptim',
-    version='0.0.10',
+    version='0.0.12',
     description='A Python package for metaheuristic optimisation.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -17,6 +17,10 @@ setup(
     author_email='harry.myburgh@gmail.com',
     py_modules=['metaoptim'],
     package_dir={'': 'src'},
+    packages=[
+        'metaoptim',
+        'metaoptim.pso',
+    ],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
