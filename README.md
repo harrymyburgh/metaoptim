@@ -96,6 +96,8 @@ The package is structured as follows:
 
 ### Guidelines for Contributing
 
+*NEW METAHEURISTICS MUST INCLUDE NUMBA ACCELERATION*
+
 1. In the description of your pull request, please explain clearly what does it implement or fix and your changes. Where possible, you should give examples in the description of the pull request. In cases that the pull request is about a code speedup, report a reproducible example and quantify the speedup.
 
 2. Give your pull request a helpful title that summarises what your contribution does.
