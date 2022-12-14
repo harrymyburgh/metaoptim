@@ -10,7 +10,7 @@ metaoptim is a Python package for metaheuristic optimization algorithms. It also
 Ensure that you have Python 3.9 or higher installed. Then, install the package using pip:
 
 ```bash
-pip3 install metaoptim
+pip3 install open-metaoptim
 ```
 
 ## Usage
