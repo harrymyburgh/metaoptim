@@ -81,8 +81,9 @@ def _update_bests_helper(fitness, swarm, pbest, pbest_fitness, gbest,
 
 
 class GBestPSO(PSO):
-    def __init__(self, problem, swarm_size, dim, max_iter, minimize=True,
-                 w=0.7298, c1=1.49618, c2=1.49618):
+    def __init__(self, problem, swarm_size, dim, max_iter, conv_buffer=0,
+                 epsilon=1e-10, minimize=True, w=0.7298, c1=1.49618,
+                 c2=1.49618):
         """
         A class for the global best particle swarm optimization algorithm. This
         particle swarm optimization algorithm uses an inertia weight, cognitive
@@ -90,15 +91,32 @@ class GBestPSO(PSO):
 
         :param problem: The problem to be optimized.
         :param swarm_size: The size of the swarm.
-        :param dim: The dimension of the swarm.
-        :param max_iter: The maximum number of iterations.
-        :param minimize: Whether to minimize the problem.
+        :param dim: The dimension of the problem.
+        :param max_iter: The maximum number of iterations. If set to None,
+               ensure the definition of a stopping condition using conv_buffer
+               and epsilon. Note that a combination of a maximum number of
+               iterations and conv_buffer/epsilon can be used to define the
+               stopping condition.
+        :param conv_buffer: The buffer size of global best fitness values to be
+               approximately equal within the threshold epsilon. It is
+               recommended to set this to at least 20.
+        :param epsilon: The error for which global best fitness values will be
+               considered approximately equal. If
+               |f(x^*_{t-1}) - f(x^*_t)| < epsilon, then the global best values
+               are considered approximately equal.
+        :param minimize: Whether to minimize or maximize the problem.
         :param w: The inertia weight.
         :param c1: The cognitive parameter.
         :param c2: The social parameter.
         """
-        super().__init__(problem, swarm_size, dim, max_iter, minimize)
-        self.gbest = copy.deepcopy(self.swarm[np.argmin(self.pbest_fitness)])
+        super().__init__(problem, swarm_size, dim, max_iter, conv_buffer,
+                         epsilon, minimize)
+        if self.minimize:
+            self.gbest = copy.deepcopy(
+                self.swarm[np.argmin(self.pbest_fitness)])
+        else:
+            self.gbest = copy.deepcopy(
+                self.swarm[np.argmax(self.pbest_fitness)])
         self.gbest_fitness = self.problem(self.gbest)
         self.w = w
         self.c1 = c1
@@ -117,9 +135,7 @@ class GBestPSO(PSO):
         """
         Optimize the problem.
         """
-        for _ in tqdm(range(self.max_iter)):
-            self.update()
-        return self.gbest, self.gbest_fitness
+        return super().optimize()
 
     def _update_bests(self):
         """
