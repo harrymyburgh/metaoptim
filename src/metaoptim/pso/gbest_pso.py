@@ -83,7 +83,7 @@ def _update_bests_helper(fitness, swarm, pbest, pbest_fitness, gbest,
 class GBestPSO(PSO):
     def __init__(self, problem, swarm_size, dim, max_iter, conv_buffer=0,
                  epsilon=1e-10, minimize=True, w=0.7298, c1=1.49618,
-                 c2=1.49618):
+                 c2=1.49618, verbose=False):
         """
         A class for the global best particle swarm optimization algorithm. This
         particle swarm optimization algorithm uses an inertia weight, cognitive
@@ -108,9 +108,10 @@ class GBestPSO(PSO):
         :param w: The inertia weight.
         :param c1: The cognitive parameter.
         :param c2: The social parameter.
+        :param verbose: Whether to print the progress of the optimization.
         """
         super().__init__(problem, swarm_size, dim, max_iter, conv_buffer,
-                         epsilon, minimize)
+                         epsilon, minimize, verbose)
         if self.minimize:
             self.gbest = copy.deepcopy(
                 self.swarm[np.argmin(self.pbest_fitness)])

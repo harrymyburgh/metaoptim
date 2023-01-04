@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 class PSO:
     def __init__(self, problem, swarm_size, dim, max_iter, conv_buffer=0,
-                 epsilon=1e-10, minimize=True):
+                 epsilon=1e-10, minimize=True, verbose=False):
         '''
         Initialize the PSO algorithm.
 
@@ -25,6 +25,7 @@ class PSO:
                |f(x^*_{t-1}) - f(x^*_t)| < epsilon, then the global best values
                are considered approximately equal.
         :param minimize: Whether to minimize or maximize the problem.
+        :param verbose: Whether to print the progress of the optimization.
         '''
         self.problem = problem
         self.swarm_size = swarm_size
@@ -61,6 +62,8 @@ class PSO:
         self.gbest_fitness = self.problem(self.gbest)
         self.prev_gbest_fitness = float("inf")
 
+        self.verbose = verbose
+
     def update(self):
         '''
         Update the swarm for one iteration.
@@ -74,7 +77,7 @@ class PSO:
         return self.optimization_alg()
 
     def _max_iter_optimize(self):
-        for _ in tqdm(range(self.max_iter)):
+        for _ in tqdm(range(self.max_iter), disable=not self.verbose):
             self.update()
         return self.gbest, self.gbest_fitness
 
@@ -84,10 +87,12 @@ class PSO:
         return self.gbest, self.gbest_fitness
 
     def _max_dyn_iter_optimize(self):
-        for _ in tqdm(range(self.max_iter)):
+        for _ in tqdm(range(self.max_iter), disable=not self.verbose):
             if self.countdown_check():
-                print(f"Global best value did not significantly change after "
-                      f"{self.conv_buffer} iterations.\nHalting optimization.")
+                if self.verbose:
+                    print(f"Global best value did not significantly change "
+                          f"after {self.conv_buffer} iterations.\nHalting "
+                          f"optimization.")
                 break
             else:
                 self.update()
