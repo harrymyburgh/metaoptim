@@ -1,11 +1,16 @@
 import copy
 import numpy as np
 from tqdm import tqdm
+from typing import Optional, Union, Tuple
+
+from metaoptim.bench_func import BenchFunc
 
 
 class PSO:
-    def __init__(self, problem, swarm_size, dim, max_iter, conv_buffer=0,
-                 epsilon=1e-10, minimize=True, verbose=False):
+    def __init__(self, problem: BenchFunc,
+                 swarm_size: int, dim: int, max_iter: Optional[int], 
+                 conv_buffer: int = 0, epsilon: float = 1e-10, 
+                 minimize: bool = True, verbose: bool = False) -> None:
         '''
         Initialize the PSO algorithm.
 
@@ -60,33 +65,33 @@ class PSO:
             self.gbest = copy.deepcopy(
                 self.swarm[np.argmax(self.pbest_fitness)])
         self.gbest_fitness = self.problem(self.gbest)
-        self.prev_gbest_fitness = float("inf")
+        self.prev_gbest_fitness = float("inf") if self.minimize else -float("inf")
 
         self.verbose = verbose
 
-    def update(self):
+    def update(self) -> None:
         '''
         Update the swarm for one iteration.
         '''
         pass
 
-    def optimize(self):
+    def optimize(self) -> Tuple[np.ndarray, Union[float, np.ndarray]]:
         '''
         Optimize the problem.
         '''
         return self.optimization_alg()
 
-    def _max_iter_optimize(self):
+    def _max_iter_optimize(self) -> Tuple[np.ndarray, Union[float, np.ndarray]]:
         for _ in tqdm(range(self.max_iter), disable=not self.verbose):
             self.update()
         return self.gbest, self.gbest_fitness
 
-    def _dyn_iter_optimize(self):
+    def _dyn_iter_optimize(self) -> Tuple[np.ndarray, Union[float, np.ndarray]]:
         while not tqdm(self.countdown_check()):  # TODO: Fix tqdm
             self.update()
         return self.gbest, self.gbest_fitness
 
-    def _max_dyn_iter_optimize(self):
+    def _max_dyn_iter_optimize(self) -> Tuple[np.ndarray, Union[float, np.ndarray]]:
         for _ in tqdm(range(self.max_iter), disable=not self.verbose):
             if self.countdown_check():
                 if self.verbose:
@@ -98,7 +103,7 @@ class PSO:
                 self.update()
         return self.gbest, self.gbest_fitness
 
-    def countdown_check(self):
+    def countdown_check(self) -> bool:
         if np.abs(self.prev_gbest_fitness - self.gbest_fitness) < self.epsilon:
             self.countdown -= 1
         else:

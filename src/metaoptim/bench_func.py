@@ -1,41 +1,95 @@
 import numpy as np
+from typing import Optional, Union
 
 
 class BenchFunc:
-    def __init__(self):
-        self.bounds = None
-        self.optimum_value = None
-        self.name = None
-        self.dim = None
+    """
+    Base class for benchmark functions used in optimization problems.
+    """
+    def __init__(self) -> None:
+        """
+        Initialize the benchmark function with default attributes.
+        """
+        self.bounds: Optional[np.ndarray] = None
+        self.optimum_value: Optional[float] = None
+        self.name: Optional[str] = None
+        self.dim: Optional[int] = None
 
-    def eval(self, x):
+    def eval(self, x: np.ndarray) -> Union[float, np.ndarray]:
+        """
+        Evaluate the benchmark function at given point(s).
+        
+        :param x: Input point(s) to evaluate
+        :return: Function value(s) at the given point(s)
+        """
         pass
 
-    def __call__(self, x):
+    def __call__(self, x: np.ndarray) -> Union[float, np.ndarray]:
+        """
+        Allow the object to be called as a function.
+        
+        :param x: Input point(s) to evaluate
+        :return: Function value(s) at the given point(s)
+        """
         return self.eval(x)
 
-    def get_bounds(self):
+    def get_bounds(self) -> Optional[np.ndarray]:
+        """
+        Get the bounds of the benchmark function.
+        
+        :return: Array of bounds for each dimension
+        """
         return self.bounds
 
-    def get_optimum_value(self):
+    def get_optimum_value(self) -> Optional[float]:
+        """
+        Get the optimal value of the benchmark function.
+        
+        :return: The optimal function value
+        """
         return self.optimum_value
 
-    def get_name(self):
+    def get_name(self) -> Optional[str]:
+        """
+        Get the name of the benchmark function.
+        
+        :return: The name of the benchmark function
+        """
         return self.name
 
-    def get_dim(self):
+    def get_dim(self) -> Optional[int]:
+        """
+        Get the dimension of the benchmark function.
+        
+        :return: The number of dimensions
+        """
         return self.dim
 
 
 class Beale(BenchFunc):
-    def __init__(self):
+    """
+    Beale benchmark function - a 2D optimization test function.
+    Global minimum: f(3, 0.5) = 0
+    """
+    def __init__(self) -> None:
+        """
+        Initialize the Beale function with bounds, optimum value, dimension, and name.
+        """
         super().__init__()
         self.bounds = np.array([[-4.5, 4.5], [-4.5, 4.5]])
         self.optimum_value = 0.0
         self.dim = 2
         self.name = "Beale"
 
-    def eval(self, x):
+    def eval(self, x: np.ndarray) -> Union[float, np.ndarray]:
+        """
+        Evaluate the Beale function at given point(s).
+        
+        :param x: Input point(s) to evaluate, must be 2-dimensional
+        :return: Function value(s) at the given point(s)
+        :raises TypeError: If input is not a numpy array
+        :raises ValueError: If input dimension is incorrect
+        """
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
@@ -48,14 +102,29 @@ class Beale(BenchFunc):
 
 
 class GoldsteinPrice(BenchFunc):
-    def __init__(self):
+    """
+    Goldstein-Price benchmark function - a 2D optimization test function.
+    Global minimum: f(0, -1) = 3
+    """
+    def __init__(self) -> None:
+        """
+        Initialize the Goldstein-Price function with bounds, optimum value, dimension, and name.
+        """
         super().__init__()
         self.bounds = np.array([[-2, 2], [-2, 2]])
         self.optimum_value = 3.0
         self.dim = 2
         self.name = "Goldstein-Price"
 
-    def eval(self, x):
+    def eval(self, x: np.ndarray) -> Union[float, np.ndarray]:
+        """
+        Evaluate the Goldstein-Price function at given point(s).
+        
+        :param x: Input point(s) to evaluate, must be 2-dimensional
+        :return: Function value(s) at the given point(s)
+        :raises TypeError: If input is not a numpy array
+        :raises ValueError: If input dimension is incorrect
+        """
         if not isinstance(x, np.ndarray):
             raise TypeError("Input (x) must be a numpy array.")
         if x.shape[-1] != self.dim:
@@ -357,7 +426,17 @@ class DropWave(BenchFunc):
 
 
 class VaryingDimBenchFunc(BenchFunc):
-    def __init__(self, dim):
+    """
+    Base class for benchmark functions with varying dimensions.
+    """
+    def __init__(self, dim: int) -> None:
+        """
+        Initialize the varying dimension benchmark function.
+        
+        :param dim: Number of dimensions for the function
+        :raises TypeError: If dim is not an integer
+        :raises ValueError: If dim is not greater than 1
+        """
         super().__init__()
         if not isinstance(dim, int):
             raise TypeError("Dimension (dim) must be an integer.")

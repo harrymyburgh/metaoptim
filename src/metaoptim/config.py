@@ -1,8 +1,15 @@
+"""
+Configuration module for metaoptim library.
+Contains Numba-related configuration variables for optimization performance.
+"""
+
 import multiprocessing
-_numba_cache = True  # Set to True/False to enable/disable Numba cache
-_numba_parallel = False  # Set to True/False to enable/disable Numba parallel
-_numba_nopython = True  # Set to True/False to enable/disable Numba nopython
-_numba_nogil = True  # Set to True/False to enable/disable Numba nogil
+
+# Numba configuration variables with type annotations
+_numba_cache: bool = True  # Set to True/False to enable/disable Numba cache
+_numba_parallel: bool = False  # Set to True/False to enable/disable Numba parallel
+_numba_nopython: bool = True  # Set to True/False to enable/disable Numba nopython
+_numba_nogil: bool = True  # Set to True/False to enable/disable Numba nogil
 # Set to the number of threads to use for Numba
-_numba_num_threads = multiprocessing.cpu_count()
-_disable_jit = True  # Set to True/False to enable/disable Numba JIT
+_numba_num_threads: int = multiprocessing.cpu_count()
+_disable_jit: bool = True  # Set to True/False to enable/disable Numba JIT

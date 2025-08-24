@@ -1,9 +1,11 @@
+from metaoptim.bench_func import BenchFunc
 from metaoptim.pso.pso import PSO
 import copy
 import numpy as np
 import numba
 from tqdm import tqdm
 import metaoptim.config as config
+from typing import Callable, Optional, Tuple, Union
 
 numba.config.DISABLE_JIT = config._disable_jit
 numba.config.NUMBA_NUM_THREADS = config._numba_num_threads
@@ -11,7 +13,8 @@ numba.config.NUMBA_NUM_THREADS = config._numba_num_threads
 
 @numba.jit(nopython=config._numba_nopython, cache=config._numba_cache,
            parallel=config._numba_parallel, nogil=config._numba_nogil)
-def _update_velocity_helper(w, c1, c2, swarm, velocity, pbest, gbest):
+def _update_velocity_helper(w: float, c1: float, c2: float, swarm: np.ndarray, 
+                           velocity: np.ndarray, pbest: np.ndarray, gbest: np.ndarray) -> np.ndarray:
     """
     Helper function for updating the velocity.
 
@@ -31,7 +34,7 @@ def _update_velocity_helper(w, c1, c2, swarm, velocity, pbest, gbest):
 
 @numba.jit(nopython=config._numba_nopython, cache=config._numba_cache,
            parallel=config._numba_parallel, nogil=config._numba_nogil)
-def _update_swarm_helper(swarm, velocity):
+def _update_swarm_helper(swarm: np.ndarray, velocity: np.ndarray) -> np.ndarray:
     '''
     Helper function for updating the swarm.
 
@@ -44,8 +47,9 @@ def _update_swarm_helper(swarm, velocity):
 
 @numba.jit(nopython=config._numba_nopython, cache=config._numba_cache,
            parallel=config._numba_parallel, nogil=config._numba_nogil)
-def _update_bests_helper(fitness, swarm, pbest, pbest_fitness, gbest,
-                         gbest_fitness, minimize):
+def _update_bests_helper(fitness: np.ndarray, swarm: np.ndarray, pbest: np.ndarray, 
+                         pbest_fitness: np.ndarray, gbest: np.ndarray,
+                         gbest_fitness: Union[float, np.ndarray], minimize: bool) -> Tuple[np.ndarray, np.ndarray, np.ndarray, Union[float, np.ndarray]]:
     """
     Helper function for updating the personal and global bests.
 
@@ -81,9 +85,11 @@ def _update_bests_helper(fitness, swarm, pbest, pbest_fitness, gbest,
 
 
 class GBestPSO(PSO):
-    def __init__(self, problem, swarm_size, dim, max_iter, conv_buffer=0,
-                 epsilon=1e-10, minimize=True, w=0.7298, c1=1.49618,
-                 c2=1.49618, verbose=False):
+    def __init__(self, problem: BenchFunc,
+                 swarm_size: int, dim: int, max_iter: Optional[int], 
+                 conv_buffer: int = 0, epsilon: float = 1e-10, minimize: bool = True, 
+                 w: float = 0.7298, c1: float = 1.49618, c2: float = 1.49618, 
+                 verbose: bool = False) -> None:
         """
         A class for the global best particle swarm optimization algorithm. This
         particle swarm optimization algorithm uses an inertia weight, cognitive
@@ -112,19 +118,12 @@ class GBestPSO(PSO):
         """
         super().__init__(problem, swarm_size, dim, max_iter, conv_buffer,
                          epsilon, minimize, verbose)
-        if self.minimize:
-            self.gbest = copy.deepcopy(
-                self.swarm[np.argmin(self.pbest_fitness)])
-        else:
-            self.gbest = copy.deepcopy(
-                self.swarm[np.argmax(self.pbest_fitness)])
-        self.gbest_fitness = self.problem(self.gbest)
         self.w = w
         self.c1 = c1
         self.c2 = c2
         # TODO: velocity clamping
 
-    def update(self):
+    def update(self) -> None:
         """
         Update the swarm for one iteration.
         """
@@ -132,13 +131,13 @@ class GBestPSO(PSO):
         self._update_velocity()
         self._update_swarm()
 
-    def optimize(self):
+    def optimize(self) -> Tuple[np.ndarray, Union[float, np.ndarray]]:
         """
         Optimize the problem.
         """
         return super().optimize()
 
-    def _update_bests(self):
+    def _update_bests(self) -> None:
         """
         Update the best positions and fitnesses.
         """
@@ -148,7 +147,7 @@ class GBestPSO(PSO):
                                  self.pbest_fitness, self.gbest,
                                  self.gbest_fitness, self.minimize)
 
-    def _update_velocity(self):
+    def _update_velocity(self) -> None:
         """
         Update the velocity of the swarm.
         """
@@ -156,7 +155,7 @@ class GBestPSO(PSO):
                                                 self.swarm, self.velocity,
                                                 self.pbest, self.gbest)
 
-    def _update_swarm(self):
+    def _update_swarm(self) -> None:
         '''
         Update the swarm.
         '''
